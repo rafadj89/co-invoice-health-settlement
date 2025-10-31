@@ -21,30 +21,10 @@ public class CuvApplicationServices {
 
     private final CuvServices cuvServices;
     private final ObjectMapper objectMapper;
-    private final ApplicationEventPublisher eventPublisher;
-
-    public void saveCuv(MultipartFile[] files, Long nit) {
-
-        for (MultipartFile file : files) {
-            try {
-                log.info("Publicando evento para el archivo: {}", file.getOriginalFilename());
-                CuvFileReceivedEvent event = new CuvFileReceivedEvent(
-                        this,
-                        file.getBytes(),
-                        file.getOriginalFilename(),
-                        nit
-                );
-                eventPublisher.publishEvent(event);
-            } catch (IOException e) {
-                log.error("No se pudo leer el archivo '{}' para publicar el evento. Archivo omitido.", file.getOriginalFilename(), e);
-            }
-        }
-    }
 
     public CuvDto saveCuv(CuvDto cuvDto) {
         return convertToDto(cuvServices.save(convertToEntity(cuvDto)));
     }
-
 
     private CuvDto convertToDto(Cuv cuv) {
         return objectMapper.convertValue(cuv, CuvDto.class);

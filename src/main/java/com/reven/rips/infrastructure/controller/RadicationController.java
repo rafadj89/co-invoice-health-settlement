@@ -1,7 +1,6 @@
 package com.reven.rips.infrastructure.controller;
 
 import com.reven.rips.application.services.RadicationApplicationService;
-import com.reven.rips.application.services.RipsApplicationService;
 import com.reven.rips.infrastructure.entity.radicacion.Radicacion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
